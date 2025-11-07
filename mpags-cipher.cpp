@@ -16,8 +16,8 @@ int main(int argc, char *argv[])
                          "Options:\n"
                           "-h|--help Display this information\n"
                          "--version Display version\n"
-                         "-i input_file\n"
-                         "-o output_file\n";
+                         "-i input_file Specify input file\n"
+                         "-o output_file Specify output file\n";
             return 0;
         }
     }
