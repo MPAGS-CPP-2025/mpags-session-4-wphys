@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
             std::cout << "Usage: mpags-cipher [-h|--help]...\n\n"
                          "Encrypt/decrypt input alphanumeric text using classical cyphers\n\n"
                          "Options:\n"
-                          "-h|--help        Display this information\n"
+                         "-h|--help         Display this information\n"
                          "--version         Display version\n"
                          "-i input_file     Specify input file\n"
                          "-o output_file    Specify output file\n";
