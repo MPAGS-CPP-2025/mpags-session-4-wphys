@@ -30,7 +30,8 @@ int main(int argc, char *argv[])
     }
 
     std::string input_file, output_file;
-    for (int i = 0; i < argc; ++i) {
+    for (int i = 1; i < argc; ++i) {
+        // Specify input file
         if (cmdLineArgs[i] == "-i") {
             if (!input_file.empty()) {
                 std::cerr << "Error: More than one input file specified" << std::endl;
@@ -42,6 +43,7 @@ int main(int argc, char *argv[])
             }
             input_file = cmdLineArgs[++i];
         }
+        // Specify output file
         else if (cmdLineArgs[i] == "-o") {
             if (!output_file.empty()) {
                 std::cerr << "Error: More than one output file specified" << std::endl;
@@ -53,12 +55,18 @@ int main(int argc, char *argv[])
             }
             output_file = cmdLineArgs[++i];
         }
+        else {
+            std::cerr << "Error: Unknown argument specified" << std::endl; 
+            return 1;
+        }
     }
+
+    // Printing input/ouput file names
     if (!input_file.empty()) {
-        std::cout << "Input file:" << input_file << std::endl;
+        std::cout << "Input file: " << input_file << std::endl;
     }
     if (!output_file.empty()) {
-        std::cout << "Ouput file:" << output_file << std::endl;
+        std::cout << "Ouput file: " << output_file << std::endl;
     }
 
     // Initialise variables
