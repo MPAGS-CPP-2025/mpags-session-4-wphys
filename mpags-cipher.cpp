@@ -1,9 +1,66 @@
 #include <cctype>
 #include <iostream>
 #include <string>
+#include <vector>
 
-int main()
+int main(int argc, char *argv[])
 {
+    const std::vector<std::string> cmdLineArgs{argv, argv + argc};
+
+    // Check for --help flag
+    for (const auto &it : cmdLineArgs) {
+        // std::cout << it << std::endl;
+        if (it == "--help" || it == "-h") {
+            std::cout << "Usage: mpags-cipher [-h|--help]...\n\n"
+                         "Encrypt/decrypt input alphanumeric text using classical cyphers\n\n"
+                         "Options:\n"
+                          "-h|--help Display this information\n"
+                         "--version Display version\n"
+                         "-i input_file\n"
+                         "-o output_file\n";
+            return 0;
+        }
+    }
+    // Check for --version flag
+    for (const auto &it : cmdLineArgs) {
+        if (it == "--version") {
+            std::cout << "mpags-cipher 1.0.0" << std::endl;
+            return 0;
+        }
+    }
+
+    std::string input_file, output_file;
+    for (int i = 0; i < argc; ++i) {
+        if (cmdLineArgs[i] == "-i") {
+            if (!input_file.empty()) {
+                std::cerr << "Error: More than one input file specified" << std::endl;
+                return 1;
+            }
+            if (i + 1 == argc || cmdLineArgs[i + 1][0] == '-') {
+                std::cerr << "Error: No input file specified" << std::endl;
+                return 1;
+            }
+            input_file = cmdLineArgs[++i];
+        }
+        else if (cmdLineArgs[i] == "-o") {
+            if (!output_file.empty()) {
+                std::cerr << "Error: More than one output file specified" << std::endl;
+                return 1;
+            }
+            if (i + 1 == argc || cmdLineArgs[i + 1][0] == '-') {
+                std::cerr << "Error: No output file specified" << std::endl;
+                return 1;
+            }
+            output_file = cmdLineArgs[++i];
+        }
+    }
+    if (!input_file.empty()) {
+        std::cout << "Input file:" << input_file << std::endl;
+    }
+    if (!output_file.empty()) {
+        std::cout << "Ouput file:" << output_file << std::endl;
+    }
+
     // Initialise variables
     char c{'x'};
     std::string out_text;
